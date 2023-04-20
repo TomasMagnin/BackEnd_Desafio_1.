@@ -4,6 +4,8 @@ class ProductManager {
     
     constructor() {
        this.products = []
+       this.id = 1; 
+
     }
 
     addProduct(title, description, price, thumbnail, code, stock) {
@@ -11,9 +13,9 @@ class ProductManager {
         const finderCode = this.products.find(item => item.code == code);
         
 
-        if(title && description && price && thumbnail && code && stock && this.validarCode(code) ) {
+        if(title && description && price && thumbnail && code && stock ) {
             let producto = {
-                id: this.getNewId(),
+                id: this.id ++,
                 title,
                 description,
                 price,
@@ -37,27 +39,15 @@ class ProductManager {
     }
     getProductsById(id) {
         let find = this.products.find(item => item.id == id)
-        //console.log("Not found");
-        return find ? this.products[id-1] : "Not found";
-        
+         return find ? console.log( this.products[id-1]) : console.log("Not found"); 
     }
-
-    getNewId() {
-      return  this.products.length + 1;
-    }
-    validarCode(code) {
-        let finder = this.products.find(item => item.code == code) 
-        return finder ? false : true;
-        }  
-    
 }
 
 
+    let poductManager = new ProductManager()        // Instanciamos la clase ProductManager y creamos el objeto productManager.                
 
-    let poductManager = new ProductManager()        // Creamos la clase product manager                
-
-    /* poductManager.addProduct('Titile1', 'Primer Producto', '5', 'http.img1', 455, 40);
+    poductManager.addProduct('Titile1', 'Primer Producto', '5', 'http.img1', 455, 40);
     poductManager.addProduct('Titile2', 'Segundo Producto', '10', 'http.img2', 456, 40);
-    poductManager.addProduct('Titile3', 'Segundo Producto', '15', 'http.img3', 456, 40); */
-    poductManager.getProducts(2); 
+    poductManager.addProduct('Titile3', 'Segundo Producto', '15', 'http.img3', 456, 40);
+    poductManager.getProducts(); 
     poductManager.getProductsById(1);
